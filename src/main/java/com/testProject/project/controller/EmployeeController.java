@@ -1,4 +1,4 @@
-package com.testProject.project.contpoller;
+package com.testProject.project.controller;
 
 import org.springframework.stereotype.Controller;
 
