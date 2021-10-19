@@ -35,4 +35,44 @@ public class Employee {
 
     @Column(name = "job")
     private String job;
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setPatronymicName(String patronymicName) {
+        this.patronymicName = patronymicName;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getPatronymicName() {
+        return patronymicName;
+    }
+
+    public String getJob() {
+        return job;
+    }
 }

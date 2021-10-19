@@ -9,6 +9,7 @@ import com.testProject.project.response.RestApiException;
 import java.util.List;
 import java.util.Optional;
 
+
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
@@ -17,7 +18,7 @@ public class EmployeeService {
     }
 
     public List<Employee> list() {
-        return employeeRepository.findAll();
+        return (List<Employee>) employeeRepository.findAll();
     }
 
     public void add(Employee employee) {
@@ -32,19 +33,17 @@ public class EmployeeService {
     }
 
     public void update(Employee employee) {
-        Optional<Assignment> row = employeeRepository.findByLastName(employee.getLastName());
+        Optional<Employee> row = employeeRepository.findById(employee.getId());
         if (row.isPresent()) {
-            Assignment item = row.get();
-            if (!employee.getLastName()).isEmpty()) {
-                item.setSubject(employee.getLastName());
+            Employee item = row.get();
+            if (employee.getId().equals(item.getId())) {
+                item.setLastName(employee.getLastName());
             }
             if (!employee.getFirstName().isEmpty()) {
-                item.setFir(employee.getExecutionSign());
+                item.setFirstName(employee.getFirstName());
             }
-            if (employee.getDeadline() != null) {
-                item.setDeadline(employee.getDeadline());
-            }
-            assignmentRepository.save(item);
+
+            employeeRepository.save(item);
         }
 
     }
