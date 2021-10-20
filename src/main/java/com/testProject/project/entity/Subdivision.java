@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Data
 @AllArgsConstructor
@@ -19,7 +22,9 @@ import javax.persistence.Table;
 @Table(name = "subdivision")
 public class Subdivision {
     @Id
-    private Long idSubdivision;
+    @SequenceGenerator(name = "subdivision_sequence", sequenceName = "subdivision_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subdivision_sequence")
+    private Long id;
 
     @Column(name = "nameSubdivision")
     private String nameSubdivision;
@@ -28,5 +33,5 @@ public class Subdivision {
     private String contactsSubdivision;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Long supervisorSubdivision;
+    private Long supervisorSubdivisionsupervisorSubdivision;
 }
