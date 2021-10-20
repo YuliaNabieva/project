@@ -39,3 +39,11 @@ create table subdivision
     supervisorSubdivision bigint,
     foreign key (supervisorSubdivision) references employee(id)
 );
+
+create table employee_asignment
+(
+    employee bigint,
+    assignment bigint,
+    foreign key (employee) references employee(id),
+    foreign key (assignment) references assignment(id)
+);
