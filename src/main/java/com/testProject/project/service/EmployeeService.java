@@ -22,7 +22,7 @@ public class EmployeeService {
 
     public void add(Employee employee) {
         if (employeeRepository.findByLastName(employee.getLastName()).isPresent()) {
-            throw new RestApiException("Subject is created");
+            throw new RestApiException("Subject exists");
         }
         employeeRepository.save(employee);
     }

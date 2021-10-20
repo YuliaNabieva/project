@@ -22,7 +22,7 @@ public class OrganizationService {
 
     public void add(Organization organization) {
         if (organizationRepository.findByNameOrg(organization.getNameOrg()).isPresent()) {
-            throw new RestApiException("Organization is not found");
+            throw new RestApiException("Organization exists");
         }
         organizationRepository.save(organization);
     }
@@ -32,7 +32,7 @@ public class OrganizationService {
     }
 
     public void update(Organization organization) {
-        Optional<Organization> row = organizationRepository.findById(organization.getIdOrganization());
+        Optional<Organization> row = organizationRepository.findById(organization.getId());
         if (row.isPresent()) {
             Organization item = row.get();
             if (!organization.getFizAdressOrg().isEmpty()) {

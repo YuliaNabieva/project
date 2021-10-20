@@ -24,7 +24,7 @@ public class SubdivisionService {
 
     public void add(Subdivision subdivision) {
         if (subdivisionRepository.findByNameSubdivision(subdivision.getNameSubdivision()).isPresent()) {
-            throw new RestApiException("Subdivision is not found");
+            throw new RestApiException("Subdivision exists");
         }
         subdivisionRepository.save(subdivision);
     }
@@ -34,7 +34,7 @@ public class SubdivisionService {
     }
 
     public void update(Subdivision subdivision) {
-        Optional<Subdivision> row = subdivisionRepository.findById(subdivision.getIdSubdivision());
+        Optional<Subdivision> row = subdivisionRepository.findById(subdivision.getId());
         if (row.isPresent()) {
             Subdivision item = row.get();
             if (!subdivision.getNameSubdivision().isEmpty()) {
@@ -42,9 +42,6 @@ public class SubdivisionService {
             }
             if (!subdivision.getContactsSubdivision().isEmpty()) {
                 item.setContactsSubdivision(subdivision.getContactsSubdivision());
-            }
-            if (subdivision.getSupervisorSubdivision() != null) {
-                item.setSupervisorSubdivision(subdivision.getSupervisorSubdivision());
             }
 
             subdivisionRepository.save(item);

@@ -2,6 +2,7 @@ package com.testProject.project.service;
 
 import com.testProject.project.entity.Assignment;
 import com.testProject.project.repository.AssignmentRepository;
+import com.testProject.project.repository.EmployeeRepository;
 import com.testProject.project.response.RestApiException;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,12 @@ import java.util.Optional;
 @Service
 public class AssignmentService {
     private final AssignmentRepository assignmentRepository;
+    private final EmployeeRepository employeeRepository;
+    private Object Employee;
 
-    public AssignmentService(AssignmentRepository assignmentRepository) {
+    public AssignmentService(AssignmentRepository assignmentRepository, EmployeeRepository employeeRepository) {
         this.assignmentRepository = assignmentRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Assignment> list() {
@@ -23,7 +27,25 @@ public class AssignmentService {
 
     public void add(Assignment assignment) {
         if (assignmentRepository.findAssignmentBySubject(assignment.getSubject()).isPresent()) {
-            throw new RestApiException("Subject is not found");
+            Optional<Assignment> row = assignmentRepository.findById(assignment.getId());
+            if (row.isPresent()) {
+                Assignment supervisor = row.get();
+                Assignment performer = row.get();
+                if (assignment.getAuthorOfAssigment() == null) {
+                    supervisor.setAuthorOfAssigment(assignment.getAuthorOfAssigment());
+                }
+                if (assignment.getPerformersOfAssigment() == null) {
+                    performer.setPerformersOfAssigment(assignment.getPerformersOfAssigment());
+                }
+                if (assignment.getControlSign() == null) {
+                    assignment.setControlSign(assignment.getControlSign());
+                }
+                if (assignment.getExecutionSign() == null) {
+                    assignment.setExecutionSign(assignment.getControlSign());
+                }
+
+                throw new RestApiException("Assignment exists");
+            }
         }
         assignmentRepository.save(assignment);
     }
