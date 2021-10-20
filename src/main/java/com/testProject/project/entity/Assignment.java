@@ -17,7 +17,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.sql.Date;
 import java.time.LocalDate;
 @Data
 @Builder

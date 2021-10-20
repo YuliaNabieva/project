@@ -1,7 +1,6 @@
 package com.testProject.project.service;
 
 
-import com.testProject.project.entity.Organization;
 import com.testProject.project.entity.Subdivision;
 import com.testProject.project.repository.SubdivisionRepository;
 import com.testProject.project.response.RestApiException;

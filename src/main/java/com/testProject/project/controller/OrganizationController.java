@@ -1,6 +1,6 @@
 package com.testProject.project.controller;
 
-import com.testProject.project.entity.Assignment;
+
 import com.testProject.project.entity.Organization;
 import com.testProject.project.service.OrganizationService;
 import org.springframework.web.bind.annotation.DeleteMapping;
