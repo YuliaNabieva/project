@@ -1,8 +1,6 @@
 package com.testProject.project.service;
 
-import com.testProject.project.entity.Assignment;
 import com.testProject.project.entity.Employee;
-import com.testProject.project.repository.AssignmentRepository;
 import com.testProject.project.repository.EmployeeRepository;
 import com.testProject.project.response.RestApiException;
 
@@ -17,8 +15,9 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<Employee> list() {
-        return (List<Employee>) employeeRepository.findAll();
+    public Iterable<Employee> list() {
+
+        return employeeRepository.findAll();
     }
 
     public void add(Employee employee) {
@@ -47,4 +46,5 @@ public class EmployeeService {
         }
 
     }
+
 }
